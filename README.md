@@ -1,3 +1,3 @@
 # Tetris
 
-A teris game written in Python.
+A Tetris game written in Python.
