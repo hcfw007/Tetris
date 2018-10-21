@@ -8,7 +8,7 @@ class Blocks:
     __BLOCK["I"] = (((0, 0), (0, 1), (0, 2), (0, 3)), ((0, 0), (1, 0), (2, 0), (3, 0)))
     __BLOCK["S"] = (((0, 0), (0, 1), (1, 1), (1, 2)), ((0, 0), (0, -1), (1, -1), (1, -2)))
     __BLOCK["Z"] = (((0, 0), (1, 0), (1, -1), (2, -1)), ((0, 0), (0, 1), (1, 1), (1, 2)))
-    __BLOCK["O"] = (((0, 0), (0, 1), (1, 1), (1, 0)))
+    __BLOCK["O"] = (((0, 0), (0, 1), (1, 1), (1, 0)), )
     __BLOCK["L"] = (((0, 0), (-1, 0), (-1, 1), (-1, 2)), ((0, 0), (0, 1), (1, 1), (2, 1)), ((0, 0), (1, 0), (1, -1), (1, -2)), ((0, 0), (0, -1), (-1, -1), (-2, -1)))
     __BLOCK["J"] = (((0, 0), (-1, 0), (-1, -1), (-1, -2)), ((0, 0), (0, -1), (1, -1), (2, -1)), ((0, 0), (1, 0), (1, 1), (1, 2)), ((0, 0), (0, 1), (-1, 1), (-2, 1)))
     __BLOCK["T"] = (((0, 0), (0, 1), (-1, 0), (1, 0)), ((0, 0), (1, 0), (0, 1), (0, -1)), ((0, 0), (0, -1), (1, 0), (-1, 0)), ((0, 0), (-1, 0), (0, -1), (0, 1)))
@@ -16,6 +16,7 @@ class Blocks:
     blockType = None
     blockDots = None
     position = [5, 0]
+    speed = 1
     
     def __init__(self):
         self.blockType = random.choice(self.__BLOCK_TYPES)
@@ -23,3 +24,12 @@ class Blocks:
         
         print(self.blockDots)
         print(self.blockType)
+
+    def update(self):
+        self.position[1] += speed
+
+    def rotate(self):
+        index = self.__BLOCK[self.blockType].index(self.blockDots)
+        index = index + 1 if index < len(self.__BLOCK[self.blockType]) - 1 else 0
+        print(index)
+        self.blockDots = self.__BLOCK[self.blockType][index]
