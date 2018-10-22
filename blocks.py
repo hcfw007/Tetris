@@ -25,7 +25,7 @@ class Blocks:
         print(self.blockDots)
         print(self.blockType)
 
-    def update(self):
+    def drop(self):
         self.position[1] += speed
 
     def rotate(self):
@@ -33,3 +33,12 @@ class Blocks:
         index = index + 1 if index < len(self.__BLOCK[self.blockType]) - 1 else 0
         print(index)
         self.blockDots = self.__BLOCK[self.blockType][index]
+
+    def getBorder(self):
+        left, top = right, bottom = self.position
+        for coordinate in self.blockDots:
+            if self.position[0] + coordinate[0] < left left =  self.position[0] + coordinate[0]
+            if self.position[0] + coordinate[0] > right right =  self.position[0] + coordinate[0]
+            if self.position[1] + coordinate[1] < top top =  self.position[1] + coordinate[1]
+            if self.position[1] + coordinate[1] < bottom bottom =  self.position[1] + coordinate[1]
+        return top, bottom, left, right
