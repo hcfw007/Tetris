@@ -37,8 +37,8 @@ class Blocks:
     def getBorder(self):
         left, top = right, bottom = self.position
         for coordinate in self.blockDots:
-            if self.position[0] + coordinate[0] < left left =  self.position[0] + coordinate[0]
-            if self.position[0] + coordinate[0] > right right =  self.position[0] + coordinate[0]
-            if self.position[1] + coordinate[1] < top top =  self.position[1] + coordinate[1]
-            if self.position[1] + coordinate[1] < bottom bottom =  self.position[1] + coordinate[1]
+            if self.position[0] + coordinate[0] < left: left =  self.position[0] + coordinate[0]
+            if self.position[0] + coordinate[0] > right: right =  self.position[0] + coordinate[0]
+            if self.position[1] + coordinate[1] < top: top =  self.position[1] + coordinate[1]
+            if self.position[1] + coordinate[1] < bottom: bottom =  self.position[1] + coordinate[1]
         return top, bottom, left, right
