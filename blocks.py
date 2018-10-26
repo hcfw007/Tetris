@@ -17,11 +17,13 @@ class Blocks:
     blockDots = None
     position = [5, 0]
     speed = 1
+    borderSize = None
     
-    def __init__(self):
+    def __init__(self, borderSize):
         self.blockType = random.choice(self.__BLOCK_TYPES)
         self.blockDots = random.choice(self.__BLOCK[self.blockType])
-        
+        self.borderSize = borderSize
+
         print(self.blockDots)
         print(self.blockType)
 
@@ -42,3 +44,9 @@ class Blocks:
             if self.position[1] + coordinate[1] < top: top =  self.position[1] + coordinate[1]
             if self.position[1] + coordinate[1] < bottom: bottom =  self.position[1] + coordinate[1]
         return top, bottom, left, right
+
+    def moveLeft(self):
+        if self.getBorder()[2] > 0: self.position[0] -= 1
+    
+    def moveRight(self):
+        if self.getBorder()[2] < self.borderSize[0] - 1: self.position[0] += 1
