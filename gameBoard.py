@@ -1,6 +1,6 @@
 from blocks import Blocks
 
-class Game:
+class GameBoard:
 
     score = 0
     alive = True
