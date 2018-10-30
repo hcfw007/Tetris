@@ -17,12 +17,12 @@ class Blocks:
     blockDots = None
     position = [5, 0]
     speed = 1
-    borderSize = None
+    boardSize = None
     
-    def __init__(self, borderSize):
+    def __init__(self, boardSize):
         self.blockType = random.choice(self.__BLOCK_TYPES)
         self.blockDots = random.choice(self.__BLOCK[self.blockType])
-        self.borderSize = borderSize
+        self.boardSize = boardSize
 
         print(self.blockDots)
         print(self.blockType)
@@ -49,4 +49,4 @@ class Blocks:
         if self.getBorder()[2] > 0: self.position[0] -= 1
     
     def moveRight(self):
-        if self.getBorder()[2] < self.borderSize[0] - 1: self.position[0] += 1
+        if self.getBorder()[2] < self.boardSize[0] - 1: self.position[0] += 1
