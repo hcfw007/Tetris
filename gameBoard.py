@@ -1,35 +1,39 @@
-from blocks import Blocks
+from tetrominoe import Tetrominoe
 
 class GameBoard:
 
     score = 0
     alive = True
+    speed = 1
 
     def __init__(self, width = 10, height = 30):
         self.width, self.height = width, height
-        self.gameBoard = [[0] * height] * width
-        self.borderSize = [width, height]
-        self.currentBlock = Blocks(self.boardSize)
-        self.nextBlock = Blocks(self.boardSize)
+        self.game_board = [[0] * height] * width
+        self.board_size = [width, height]
+        self.current_tetrominoe = Tetrominoe(self.board_size, self.speed)
+        self.next_tetrominoe = Tetrominoe(self.board_size, self.speed)
 
-    def checkContact(self, block):
+    def check_contact(self, tetrominoe):
         contact = False
-        for dots in block.blockDots:
-            if self.gameBoard[block.position[0] + dots[0], block.position[1] + dots[1]] == 1:
+        for blocks in tetrominoe.blocks:
+            if self.game_board[tetrominoe.position[0] + dots[0], tetrominoe.position[1] + blocks[1]] == 1:
                 contact = True
                 break
         return contact
 
     def settle(self):
-        for dots in self.currentBlock.blockDots:
-            self.gameBoard[block.position[0] + dots[0], block.position[1] + dots[1]] = 1
-        self.currentBlock = self.nextBlock
-        self.nextBlock = BLocks(self.borderSize)
+        for blocks in self.current_tetrominoe.blocks:
+            self.game_board[tetrominoe.position[0] + dots[0], tetrominoe.position[1] + blocks[1]] = 1
+        self.generate_new_block()
 
-    def checkDeath(self):
+    def check_death(self):
         death = False
-        for dots in self.currentBlock.blockDots:
-            if self.currentBlock.position[1] + dots[1] <2:
+        for blocks in self.current_tetrominoe.blocks:
+            if self.current_tetrominoe.position[1] + blocks[1] <2:
                 death = True
                 break
         return death
+
+    def generate_new_block(self):
+        self.current_tetrominoe = self.next_tetrominoe
+        self.next_tetrominoe = Tetrominoe(self.board_size, speed)

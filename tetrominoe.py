@@ -1,6 +1,6 @@
 import random
 
-class Blocks:
+class Tetrominoe:
 
     __BLOCK_TYPES = ("I", "S", "Z", "O", "L", "J", "T")
 
@@ -13,32 +13,29 @@ class Blocks:
     __BLOCK["J"] = (((0, 0), (-1, 0), (-1, -1), (-1, -2)), ((0, 0), (0, -1), (1, -1), (2, -1)), ((0, 0), (1, 0), (1, 1), (1, 2)), ((0, 0), (0, 1), (-1, 1), (-2, 1)))
     __BLOCK["T"] = (((0, 0), (0, 1), (-1, 0), (1, 0)), ((0, 0), (1, 0), (0, 1), (0, -1)), ((0, 0), (0, -1), (1, 0), (-1, 0)), ((0, 0), (-1, 0), (0, -1), (0, 1)))
 
-    blockType = None
-    blockDots = None
     position = [5, 0]
-    speed = 1
-    boardSize = None
     
-    def __init__(self, boardSize):
-        self.blockType = random.choice(self.__BLOCK_TYPES)
-        self.blockDots = random.choice(self.__BLOCK[self.blockType])
-        self.boardSize = boardSize
+    def __init__(self, board_size, speed = 1):
+        self.type = random.choice(self.__BLOCK_TYPES)
+        self.blocks = random.choice(self.__BLOCK[self.type])
+        self.board_size = board_size
+        self.speed = speed
 
-        print(self.blockDots)
-        print(self.blockType)
+        print(self.blocks)
+        print(self.type)
 
     def drop(self):
         self.position[1] += speed
 
     def rotate(self):
-        index = self.__BLOCK[self.blockType].index(self.blockDots)
-        index = index + 1 if index < len(self.__BLOCK[self.blockType]) - 1 else 0
+        index = self.__BLOCK[self.type].index(self.blocks)
+        index = index + 1 if index < len(self.__BLOCK[self.type]) - 1 else 0
         print(index)
-        self.blockDots = self.__BLOCK[self.blockType][index]
+        self.blocks = self.__BLOCK[self.type][index]
 
-    def getBorder(self):
+    def get_border(self):
         left, top = right, bottom = self.position
-        for coordinate in self.blockDots:
+        for coordinate in self.blocks:
             if self.position[0] + coordinate[0] < left: left =  self.position[0] + coordinate[0]
             if self.position[0] + coordinate[0] > right: right =  self.position[0] + coordinate[0]
             if self.position[1] + coordinate[1] < top: top =  self.position[1] + coordinate[1]
@@ -46,7 +43,7 @@ class Blocks:
         return top, bottom, left, right
 
     def moveLeft(self):
-        if self.getBorder()[2] > 0: self.position[0] -= 1
+        if self.get_border()[2] > 0: self.position[0] -= 1
     
     def moveRight(self):
-        if self.getBorder()[2] < self.boardSize[0] - 1: self.position[0] += 1
+        if self.get_border()[2] < self.board_size[0] - 1: self.position[0] += 1
