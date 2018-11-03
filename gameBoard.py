@@ -8,7 +8,7 @@ class GameBoard:
 
     def __init__(self, width = 10, height = 30):
         self.width, self.height = width, height
-        self.game_board = [[0] *(height - 1)] * width
+        self.game_board = [([0] * height) for i in range(width)]
         self.board_size = [width, height]
         self.current_tetrominoe = Tetrominoe(self.board_size, self.speed)
         self.next_tetrominoe = Tetrominoe(self.board_size, self.speed)
