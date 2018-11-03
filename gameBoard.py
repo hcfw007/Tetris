@@ -8,7 +8,7 @@ class GameBoard:
 
     def __init__(self, width = 10, height = 30):
         self.width, self.height = width, height
-        self.game_board = [[1] + [0] *(height - 1)] * width
+        self.game_board = [[0] *(height - 1)] * width
         self.board_size = [width, height]
         self.current_tetrominoe = Tetrominoe(self.board_size, self.speed)
         self.next_tetrominoe = Tetrominoe(self.board_size, self.speed)
@@ -42,5 +42,18 @@ class GameBoard:
         rows_to_clear = []
         for y in range(self.board_size[1]):
             row = [self.game_board[x][y] for x in range(self.board_size[0])]
-            print(row)
             if min(row) == 1: rows_to_clear.append(y)
+        if len(rows_to_clear) > 0: self.clear(rows_to_clear)
+
+    def clear(self, rows):
+        for y in range(min(rows), self.board_size[1]):
+            for x in range(self.board_size[0]):
+                y2 = y + len(rows)
+                self.game_board[x][y] = self.game_board[x][y2] if y2 < (self.board_size[1] - 1) else 0
+
+    def show_game_board(self):
+        # display board in nomal view (smaller y at bottom)
+        print("displaying game board:")
+        for y in range(self.board_size[1] - 1, -1, -1):
+            row = [self.game_board[x][y] for x in range(self.board_size[0])]
+            print(row)
