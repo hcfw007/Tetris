@@ -21,8 +21,6 @@ class Tetrominoe:
         self.position = [board_size[0] // 2, board_size[1]]
         self.position[1] = 2 * board_size[1] - self.get_border()[0] - 1
 
-        print(self.blocks)
-        print(self.type)
 
     def drop(self):
         self.position[1] -= speed
@@ -46,7 +44,3 @@ class Tetrominoe:
     
     def moveRight(self):
         if self.get_border()[2] < self.board_size[0] - 1: self.position[0] += 1
-
-a = Tetrominoe([5, 10])
-print(a.position)
-print(a.get_border()[0])

@@ -57,3 +57,4 @@ class GameBoard:
         for y in range(self.board_size[1] - 1, -1, -1):
             row = [self.game_board[x][y] for x in range(self.board_size[0])]
             print(row)
+            
