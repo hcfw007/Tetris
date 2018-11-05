@@ -19,7 +19,7 @@ class Tetrominoe:
         self.board_size = board_size
         self.speed = speed
         self.position = [board_size[0] // 2, board_size[1]]
-        self.position[1] = 2 * board_size[1] - self.get_border()[0] - 1
+        self.position[1] = 2 * board_size[1] - self.get_border()[0] - 3
 
 
     def drop(self):

@@ -10,13 +10,18 @@ def main():
     screen.fill((255, 255, 255))
 
     block_length = 20
-    height = 25
-    width = 8
+    height = 25 # min 20
+    width = 8 # min 8
+    padding_left = 20
+    padding_top = 20
+    border_width = 5
     
     gameboard = GameBoard(width, height)
     
-    board_rect = ((20, 20), (20 + width * block_length + 10, 20 + height * block_length + 10))
+    board_rect = ((padding_left, padding_top), (width * block_length + border_width * 2, height * block_length + border_width * 2))
+    grid_origin = ((padding_left + border_width), (padding_top + height * block_length + border_width))
     screen.fill((0, 0, 0), board_rect)
+    gameboard.draw_blocks(screen, grid_origin, block_length)
     pygame.display.flip()
     
     running = True

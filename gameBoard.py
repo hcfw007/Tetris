@@ -6,6 +6,8 @@ class GameBoard:
     alive = True
     speed = 1
 
+    BLOCK_COLOR = (255, 255, 0)
+
     def __init__(self, width = 10, height = 30):
         self.width, self.height = width, height
         self.game_board = [([0] * height) for i in range(width)]
@@ -58,3 +60,9 @@ class GameBoard:
             row = [self.game_board[x][y] for x in range(self.board_size[0])]
             print(row)
             
+    def draw_blocks(self, surface, grid_origin, block_length):
+        for x in range(self.board_size[0]):
+            for y in range(self.board_size[1]):
+                if self.game_board[x][y] == 1:
+                    block_rect = ((grid_origin[0] + x * block_length, grid_origin[1] - (y + 1) * block_length), (block_length, block_length))
+                    surface.fill(self.BLOCK_COLOR, block_rect)
