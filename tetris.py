@@ -21,7 +21,7 @@ def main():
     board_rect = ((padding_left, padding_top), (width * block_length + border_width * 2, height * block_length + border_width * 2))
     grid_origin = ((padding_left + border_width), (padding_top + height * block_length + border_width))
     screen.fill((0, 0, 0), board_rect)
-    gameboard.draw_blocks(screen, grid_origin, block_length)
+    gameboard.draw(screen, grid_origin, block_length)
     pygame.display.flip()
     
     running = True

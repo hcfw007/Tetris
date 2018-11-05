@@ -60,9 +60,20 @@ class GameBoard:
             row = [self.game_board[x][y] for x in range(self.board_size[0])]
             print(row)
             
-    def draw_blocks(self, surface, grid_origin, block_length):
+    def draw(self, surface, grid_origin, block_length):
+
+        def draw_block(block_coordinate):
+            block_rect = ((grid_origin[0] + block_coordinate[0] * block_length, grid_origin[1] - (block_coordinate[1] + 1) * block_length), (block_length, block_length))
+            surface.fill(self.BLOCK_COLOR, block_rect)
+
         for x in range(self.board_size[0]):
             for y in range(self.board_size[1]):
                 if self.game_board[x][y] == 1:
-                    block_rect = ((grid_origin[0] + x * block_length, grid_origin[1] - (y + 1) * block_length), (block_length, block_length))
-                    surface.fill(self.BLOCK_COLOR, block_rect)
+                    draw_block([x, y])
+        
+        t = self.current_tetrominoe
+        for i in t.blocks:
+            x = t.position[0] + i[0]
+            y = t.position[1] + i[1]
+            if (x < self.width) and (y < self.height):
+                draw_block([x, y])
