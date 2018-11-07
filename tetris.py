@@ -20,9 +20,7 @@ def main():
     
     board_rect = ((padding_left, padding_top), (width * block_length + border_width * 2, height * block_length + border_width * 2))
     grid_origin = ((padding_left + border_width), (padding_top + height * block_length + border_width))
-    screen.fill((0, 0, 0), board_rect)
-    gameboard.draw(screen, grid_origin, block_length)
-    pygame.display.flip()
+    
     
     running = True
      
@@ -30,7 +28,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
+                gameboard.current_tetrominoe.rotate()
+        
+        screen.fill((0, 0, 0), board_rect)
+        gameboard.draw(screen, grid_origin, block_length)
+        pygame.display.flip()
  
      
 if __name__=="__main__":
