@@ -30,6 +30,10 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 gameboard.current_tetrominoe.rotate()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+                gameboard.current_tetrominoe.moveLeft()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                gameboard.current_tetrominoe.moveRight()
         
         screen.fill((0, 0, 0), board_rect)
         gameboard.draw(screen, grid_origin, block_length)

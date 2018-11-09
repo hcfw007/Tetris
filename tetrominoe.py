@@ -20,6 +20,7 @@ class Tetrominoe:
         self.speed = speed
         self.position = [board_size[0] // 2, board_size[1]]
         self.position[1] = 2 * board_size[1] - self.get_border()[0] - 3
+        print("new " + self.type + " shaped tetrominoe")
 
 
     def drop(self):
@@ -43,4 +44,4 @@ class Tetrominoe:
         if self.get_border()[2] > 0: self.position[0] -= 1
     
     def moveRight(self):
-        if self.get_border()[2] < self.board_size[0] - 1: self.position[0] += 1
+        if self.get_border()[3] < self.board_size[0] - 1: self.position[0] += 1
