@@ -13,18 +13,20 @@ class Tetrominoe:
     __BLOCK["J"] = (((0, 0), (-1, 0), (-1, -1), (-1, -2)), ((0, 0), (0, -1), (1, -1), (2, -1)), ((0, 0), (1, 0), (1, 1), (1, 2)), ((0, 0), (0, 1), (-1, 1), (-2, 1)))
     __BLOCK["T"] = (((0, 0), (0, 1), (-1, 0), (1, 0)), ((0, 0), (1, 0), (0, 1), (0, -1)), ((0, 0), (0, -1), (1, 0), (-1, 0)), ((0, 0), (-1, 0), (0, -1), (0, 1)))
     
-    def __init__(self, board_size, speed = 1):
+    def __init__(self, board_size):
         self.type = random.choice(self.__BLOCK_TYPES)
         self.blocks = random.choice(self.__BLOCK[self.type])
         self.board_size = board_size
-        self.speed = speed
         self.position = [board_size[0] // 2, board_size[1]]
         self.position[1] = 2 * board_size[1] - self.get_border()[0] - 3
         print("new " + self.type + " shaped tetrominoe")
 
 
     def drop(self):
-        self.position[1] -= speed
+        self.position[1] -= 1
+
+    def retreat(self):
+        self.position[1] += 1
 
     def rotate(self):
         index = self.__BLOCK[self.type].index(self.blocks)

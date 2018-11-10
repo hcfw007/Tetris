@@ -20,6 +20,8 @@ def main():
     
     board_rect = ((padding_left, padding_top), (width * block_length + border_width * 2, height * block_length + border_width * 2))
     grid_origin = ((padding_left + border_width), (padding_top + height * block_length + border_width))
+    clock = pygame.time.Clock()
+    time_elapsed = 0
     
     
     running = True
@@ -35,6 +37,10 @@ def main():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                 gameboard.current_tetrominoe.moveRight()
         
+        time_elapsed += clock.tick(30)
+        if time_elapsed > 150 * (11 - gameboard.speed):
+            time_elapsed = 0
+            gameboard.next_tick()
         screen.fill((0, 0, 0), board_rect)
         gameboard.draw(screen, grid_origin, block_length)
         pygame.display.flip()

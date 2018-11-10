@@ -4,7 +4,7 @@ class GameBoard:
 
     score = 0
     alive = True
-    speed = 1
+    speed = 5
 
     BLOCK_COLOR = (255, 255, 0)
 
@@ -12,20 +12,20 @@ class GameBoard:
         self.width, self.height = width, height
         self.game_board = [([0] * height) for i in range(width)]
         self.board_size = [width, height]
-        self.current_tetrominoe = Tetrominoe(self.board_size, self.speed)
-        self.next_tetrominoe = Tetrominoe(self.board_size, self.speed)
+        self.current_tetrominoe = Tetrominoe(self.board_size)
+        self.next_tetrominoe = Tetrominoe(self.board_size)
 
     def check_contact(self, tetrominoe):
         contact = False
         for blocks in tetrominoe.blocks:
-            if self.game_board[tetrominoe.position[0] + dots[0], tetrominoe.position[1] + blocks[1]] == 1:
+            if tetrominoe.position[1] + blocks[1] < 0 or self.game_board[tetrominoe.position[0] + blocks[0]][tetrominoe.position[1] + blocks[1]] == 1:
                 contact = True
                 break
         return contact
 
     def settle(self):
         for blocks in self.current_tetrominoe.blocks:
-            self.game_board[tetrominoe.position[0] + dots[0], tetrominoe.position[1] + blocks[1]] = 1
+            self.game_board[self.current_tetrominoe.position[0] + blocks[0]][self.current_tetrominoe.position[1] + blocks[1]] = 1
         self.generate_new_block()
 
     def check_death(self):
@@ -38,7 +38,7 @@ class GameBoard:
 
     def generate_new_block(self):
         self.current_tetrominoe = self.next_tetrominoe
-        self.next_tetrominoe = Tetrominoe(self.board_size, speed)
+        self.next_tetrominoe = Tetrominoe(self.board_size)
 
     def try_to_clear(self):
         rows_to_clear = []
@@ -77,3 +77,9 @@ class GameBoard:
             y = t.position[1] + i[1]
             if (x < self.width) and (y < self.height):
                 draw_block([x, y])
+
+    def next_tick(self):
+        self.current_tetrominoe.drop()
+        if self.check_contact(self.current_tetrominoe):
+            self.current_tetrominoe.retreat()
+            self.settle()
