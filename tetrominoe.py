@@ -13,8 +13,8 @@ class Tetrominoe:
     __BLOCK["J"] = (((0, 0), (-1, 0), (-1, -1), (-1, -2)), ((0, 0), (0, -1), (1, -1), (2, -1)), ((0, 0), (1, 0), (1, 1), (1, 2)), ((0, 0), (0, 1), (-1, 1), (-2, 1)))
     __BLOCK["T"] = (((0, 0), (0, 1), (-1, 0), (1, 0)), ((0, 0), (1, 0), (0, 1), (0, -1)), ((0, 0), (0, -1), (1, 0), (-1, 0)), ((0, 0), (-1, 0), (0, -1), (0, 1)))
     
-    def __init__(self, board_size):
-        self.type = random.choice(self.__BLOCK_TYPES)
+    def __init__(self, board_size, block_type = "Random"):
+        self.type = random.choice(self.__BLOCK_TYPES) if block_type == "Random" else block_type
         self.blocks = random.choice(self.__BLOCK[self.type])
         self.board_size = board_size
         self.position = [board_size[0] // 2, board_size[1]]
@@ -42,8 +42,8 @@ class Tetrominoe:
             if self.position[1] + coordinate[1] < bottom: bottom =  self.position[1] + coordinate[1]
         return top, bottom, left, right
 
-    def moveLeft(self):
-        if self.get_border()[2] > 0: self.position[0] -= 1
+    def move_left(self):
+        self.position[0] -= 1
     
-    def moveRight(self):
-        if self.get_border()[3] < self.board_size[0] - 1: self.position[0] += 1
+    def move_right(self):
+        self.position[0] += 1

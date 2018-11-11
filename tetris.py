@@ -33,9 +33,9 @@ def main():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
                 gameboard.current_tetrominoe.rotate()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-                gameboard.current_tetrominoe.moveLeft()
+                gameboard.move_left()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                gameboard.current_tetrominoe.moveRight()
+                gameboard.move_right()
         
         time_elapsed += clock.tick(30)
         if time_elapsed > 150 * (11 - gameboard.speed):

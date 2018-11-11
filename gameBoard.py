@@ -4,7 +4,7 @@ class GameBoard:
 
     score = 0
     alive = True
-    speed = 5
+    speed = 9
 
     BLOCK_COLOR = (255, 255, 0)
 
@@ -83,3 +83,26 @@ class GameBoard:
         if self.check_contact(self.current_tetrominoe):
             self.current_tetrominoe.retreat()
             self.settle()
+    
+    def move_left(self):
+        if self.check_left(self.current_tetrominoe): self.current_tetrominoe.move_left()
+        
+    def move_right(self):
+        if self.check_right(self.current_tetrominoe): self.current_tetrominoe.move_right()
+
+    def check_left(self, tetrominoe):
+        left = tetrominoe.get_border()[2]
+        if left < 1: return False
+        for block in tetrominoe.blocks:
+            if tetrominoe.position[1] + block[1] > self.board_size[1] - 1: continue
+            if self.game_board[tetrominoe.position[0] + block[0] - 1][tetrominoe.position[1] + block[1]] == 1: return False
+        return True
+        
+
+    def check_right(self, tetrominoe):
+        right = tetrominoe.get_border()[3]
+        if right > self.board_size[0] - 2: return False
+        for block in tetrominoe.blocks:
+            if tetrominoe.position[1] + block[1] > self.board_size[1] - 1: continue
+            if self.game_board[tetrominoe.position[0] + block[0] - 1][tetrominoe.position[1] + block[1]] == 1: return False
+        return True
