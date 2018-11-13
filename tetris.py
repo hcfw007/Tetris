@@ -38,7 +38,7 @@ def main():
                 gameboard.move_right()
         
         time_elapsed += clock.tick(30)
-        if time_elapsed > 150 * (11 - gameboard.speed):
+        if time_elapsed > 70 * (11 - gameboard.speed):
             time_elapsed = 0
             gameboard.next_tick()
         screen.fill((0, 0, 0), board_rect)

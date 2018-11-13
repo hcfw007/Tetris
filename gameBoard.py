@@ -27,6 +27,7 @@ class GameBoard:
         for blocks in self.current_tetrominoe.blocks:
             self.game_board[self.current_tetrominoe.position[0] + blocks[0]][self.current_tetrominoe.position[1] + blocks[1]] = 1
         self.generate_new_block()
+        self.try_to_clear()
 
     def check_death(self):
         death = False
@@ -48,10 +49,11 @@ class GameBoard:
         if len(rows_to_clear) > 0: self.clear(rows_to_clear)
 
     def clear(self, rows):
-        for y in range(min(rows), self.board_size[1]):
-            for x in range(self.board_size[0]):
-                y2 = y + len(rows)
-                self.game_board[x][y] = self.game_board[x][y2] if y2 < (self.board_size[1] - 1) else 0
+        rows.sort(reverse = True)
+        for row in rows:
+            for y in range(row, self.board_size[1]):
+                for x in range(self.board_size[0]):
+                    self.game_board[x][y] = self.game_board[x][y + 1] if y + 1 < (self.board_size[1] - 1) else 0
 
     def show_game_board(self):
         # display board in nomal view (smaller y at bottom)
