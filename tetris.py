@@ -17,6 +17,10 @@ def main():
     border_width = 5
     
     gameboard = GameBoard(width, height)
+
+    font = pygame.font.SysFont('arail', 64)
+    title_surface = font.render('TETRIS', True, (88, 87, 86))
+    screen.blit(title_surface, (215, 50))
     
     board_rect = ((padding_left, padding_top), (width * block_length + border_width * 2, height * block_length + border_width * 2))
     grid_origin = ((padding_left + border_width), (padding_top + height * block_length + border_width))
