@@ -27,7 +27,7 @@ class GameBoard:
         for blocks in self.current_tetrominoe.blocks:
             self.game_board[self.current_tetrominoe.position[0] + blocks[0]][self.current_tetrominoe.position[1] + blocks[1]] = 1
         self.generate_new_block()
-        self.try_to_clear()
+        return self.try_to_clear()
 
     def check_death(self):
         death = False
@@ -46,7 +46,10 @@ class GameBoard:
         for y in range(self.board_size[1]):
             row = [self.game_board[x][y] for x in range(self.board_size[0])]
             if min(row) == 1: rows_to_clear.append(y)
-        if len(rows_to_clear) > 0: self.clear(rows_to_clear)
+        if len(rows_to_clear) > 0:
+            self.clear(rows_to_clear)
+            return True
+        return False
 
     def clear(self, rows):
         rows.sort(reverse = True)
@@ -54,6 +57,7 @@ class GameBoard:
             for y in range(row, self.board_size[1]):
                 for x in range(self.board_size[0]):
                     self.game_board[x][y] = self.game_board[x][y + 1] if y + 1 < (self.board_size[1] - 1) else 0
+        self.score += len(rows) ** 2
 
     def show_game_board(self):
         # display board in nomal view (smaller y at bottom)
@@ -81,10 +85,15 @@ class GameBoard:
                 draw_block([x, y])
 
     def next_tick(self):
+        score_change = False
         self.current_tetrominoe.drop()
         if self.check_contact(self.current_tetrominoe):
             self.current_tetrominoe.retreat()
-            self.settle()
+            score_change = self.settle()
+        return {
+            'dead': self.check_death(),
+            'score_change': score_change,
+        }
     
     def move_left(self):
         if self.check_left(self.current_tetrominoe): self.current_tetrominoe.move_left()
