@@ -32,10 +32,11 @@ def main():
      
     while running:
         for event in pygame.event.get():
+
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-                gameboard.current_tetrominoe.rotate()
+                gameboard.rotate()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                 gameboard.move_left()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:

@@ -101,6 +101,9 @@ class GameBoard:
     def move_right(self):
         if self.check_right(self.current_tetrominoe): self.current_tetrominoe.move_right()
 
+    def rotate(self):
+        self.current_tetrominoe.rotate()
+
     def check_left(self, tetrominoe):
         left = tetrominoe.get_border()[2]
         if left < 1: return False
