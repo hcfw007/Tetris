@@ -102,7 +102,7 @@ class GameBoard:
         if self.check_right(self.current_tetrominoe): self.current_tetrominoe.move_right()
 
     def rotate(self):
-        self.current_tetrominoe.rotate()
+        if self.check_current_rotate(): self.current_tetrominoe.rotate()
 
     def check_left(self, tetrominoe):
         left = tetrominoe.get_border()[2]
@@ -111,7 +111,6 @@ class GameBoard:
             if tetrominoe.position[1] + block[1] > self.board_size[1] - 1: continue
             if self.game_board[tetrominoe.position[0] + block[0] - 1][tetrominoe.position[1] + block[1]] == 1: return False
         return True
-        
 
     def check_right(self, tetrominoe):
         right = tetrominoe.get_border()[3]
@@ -120,3 +119,15 @@ class GameBoard:
             if tetrominoe.position[1] + block[1] > self.board_size[1] - 1: continue
             if self.game_board[tetrominoe.position[0] + block[0] - 1][tetrominoe.position[1] + block[1]] == 1: return False
         return True
+
+    def check_current_rotate(self):
+        index = self.current_tetrominoe._Tetrominoe__BLOCK[self.current_tetrominoe.type].index(self.current_tetrominoe.blocks)
+        index = index + 1 if index < len(self.current_tetrominoe._Tetrominoe__BLOCK[self.current_tetrominoe.type]) - 1 else 0
+        new_lattice = self.current_tetrominoe._Tetrominoe__BLOCK[self.current_tetrominoe.type][index]
+        for block in new_lattice:
+            x, y = self.current_tetrominoe.position[0] + block[0], self.current_tetrominoe.position[1] + block[1]
+            if x < 0 or x >= self.board_size[0]: return False
+            if y < 0: return False
+            if self.game_board[x][y] != 0: return False
+        return True
+            
