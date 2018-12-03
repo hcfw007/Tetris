@@ -3,6 +3,7 @@ from tetrominoe import Tetrominoe
 class GameBoard:
 
     score = 0
+    score_list = (0, 1, 4, 9, 16)
     alive = True
     speed = 9
 
@@ -47,6 +48,7 @@ class GameBoard:
             row = [self.game_board[x][y] for x in range(self.board_size[0])]
             if min(row) == 1: rows_to_clear.append(y)
         if len(rows_to_clear) > 0:
+            self.score += self.score_list[len(rows_to_clear)]
             self.clear(rows_to_clear)
             return True
         return False
