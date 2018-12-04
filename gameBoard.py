@@ -59,7 +59,6 @@ class GameBoard:
             for y in range(row, self.board_size[1]):
                 for x in range(self.board_size[0]):
                     self.game_board[x][y] = self.game_board[x][y + 1] if y + 1 < (self.board_size[1] - 1) else 0
-        self.score += len(rows) ** 2
 
     def show_game_board(self):
         # display board in nomal view (smaller y at bottom)
