@@ -56,7 +56,7 @@ def main():
                 screen.fill((255, 255, 255), ((215, 190), (185, 60)))
                 score_surface = font.render(str(gameboard.score), True, (0, 0, 0))
                 screen.blit(score_surface, (215, 190))
-            if change['death']:
+            if change['dead']:
                 running = False
                 # TODO add game over hint and replay button
         screen.fill((0, 0, 0), board_rect)
