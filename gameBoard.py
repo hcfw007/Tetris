@@ -33,7 +33,7 @@ class GameBoard:
     def check_death(self):
         death = False
         for blocks in self.current_tetrominoe.blocks:
-            if self.current_tetrominoe.position[1] + blocks[1] <2:
+            if self.current_tetrominoe.position[1] + blocks[1] <2 and self.check_contact(self.current_tetrominoe):
                 death = True
                 break
         return death
