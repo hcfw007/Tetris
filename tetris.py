@@ -47,7 +47,9 @@ def main():
                 gameboard.move_left()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                 gameboard.move_right()
-        
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                gameboard.toggle_pause()
+
         time_elapsed += clock.tick(30)
         if time_elapsed > 70 * (11 - gameboard.speed):
             time_elapsed = 0

@@ -6,6 +6,7 @@ class GameBoard:
     score_list = (0, 1, 4, 9, 16)
     alive = True
     speed = 9
+    pause = False
 
     BLOCK_COLOR = (255, 255, 0)
 
@@ -86,15 +87,21 @@ class GameBoard:
                 draw_block([x, y])
 
     def next_tick(self):
-        score_change = False
-        self.current_tetrominoe.drop()
-        if self.check_contact(self.current_tetrominoe):
-            self.current_tetrominoe.retreat()
-            score_change = self.settle()
-        return {
-            'dead': self.check_death(),
-            'score_change': score_change,
-        }
+        if self.pause:
+            return {
+                'dead': False,
+                'score_change': False,
+            }
+        else:
+            score_change = False
+            self.current_tetrominoe.drop()
+            if self.check_contact(self.current_tetrominoe):
+                self.current_tetrominoe.retreat()
+                score_change = self.settle()
+            return {
+                'dead': self.check_death(),
+                'score_change': score_change,
+            }
     
     def move_left(self):
         if self.check_left(self.current_tetrominoe): self.current_tetrominoe.move_left()
@@ -132,3 +139,5 @@ class GameBoard:
             if self.game_board[x][y] != 0: return False
         return True
             
+    def toggle_pause(self):
+        self.pause = not self.pause
