@@ -41,12 +41,14 @@ def main():
 
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-                gameboard.rotate()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-                gameboard.move_left()
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                gameboard.move_right()
+
+            if not gameboard.pause:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
+                    gameboard.rotate()
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
+                    gameboard.move_left()
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                    gameboard.move_right()
             if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
                 gameboard.toggle_pause()
 
