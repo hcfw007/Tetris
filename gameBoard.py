@@ -125,7 +125,7 @@ class GameBoard:
         if right > self.board_size[0] - 2: return False
         for block in tetrominoe.blocks:
             if tetrominoe.position[1] + block[1] > self.board_size[1] - 1: continue
-            if self.game_board[tetrominoe.position[0] + block[0] - 1][tetrominoe.position[1] + block[1]] == 1: return False
+            if self.game_board[tetrominoe.position[0] + block[0] + 1][tetrominoe.position[1] + block[1]] == 1: return False
         return True
 
     def check_current_rotate(self):
