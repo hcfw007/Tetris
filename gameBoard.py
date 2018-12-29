@@ -32,12 +32,9 @@ class GameBoard:
         return self.try_to_clear()
 
     def check_death(self):
-        death = False
-        for blocks in self.current_tetrominoe.blocks:
-            if self.current_tetrominoe.position[1] + blocks[1] <2 and self.check_contact(self.current_tetrominoe):
-                death = True
-                break
-        return death
+        for x in range(self.board_size[0]): 
+            if self.game_board[x][self.board_size[1] - 4] == 1: return True
+        return False
 
     def generate_new_block(self):
         self.current_tetrominoe = self.next_tetrominoe
