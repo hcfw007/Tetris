@@ -1,8 +1,8 @@
 import pygame
-from gameboard import GameBoard
+from gameBoard import GameBoard
 
 def main():
-     
+    
     pygame.init()
     pygame.display.set_caption("Tetris")
     
@@ -35,7 +35,7 @@ def main():
     
     
     running = True
-     
+    
     while running:
         for event in pygame.event.get():
 
@@ -66,7 +66,7 @@ def main():
         screen.fill((0, 0, 0), board_rect)
         gameboard.draw(screen, grid_origin, block_length)
         pygame.display.flip()
- 
-     
+
+
 if __name__=="__main__":
     main()
